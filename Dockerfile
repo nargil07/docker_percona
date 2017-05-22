@@ -12,11 +12,17 @@ RUN \
     dpkg -i percona-release_0.1-4.wheezy_all.deb && \
     rm percona-release_0.1-4.wheezy_all.deb && \
     apt-get update && apt-get install -y percona-server-server-$PERCONA_VERSION
+   
+RUN \
+    apt-get install -y wget && \
+    wget https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64.deb && \
+    dpkg -i dumb-init_*.deb
 
 EXPOSE 3306
 
 VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 
 RUN chmod 777 -R /var/lib/mysql
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 CMD ["mysqld"]
