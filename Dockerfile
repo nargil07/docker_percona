@@ -22,7 +22,8 @@ EXPOSE 3306
 
 VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 
-RUN chmod 777 -R /var/lib/mysql
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-CMD ["mysqld"]
+COPY percona-launch.sh /tmp/percona-launch.sh
+RUN chmod +x /tmp/percona-launch.sh
+
+CMD ["/tmp/percona-launch"]
