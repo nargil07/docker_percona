@@ -26,4 +26,4 @@ VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 COPY percona-launch.sh /tmp/percona-launch.sh
 RUN chmod +x /tmp/percona-launch.sh
 
-CMD ["/tmp/percona-launch"]
+CMD ["/tmp/percona-launch.sh"]
